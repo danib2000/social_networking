@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 
 // Routes which should handle requests
-app.use('/customer', authRoutes);
+app.use('/user', authRoutes);
 //app.use('/auth/search', search)
 app.use((req, res, next) => {
     const err = new Error('not found');
