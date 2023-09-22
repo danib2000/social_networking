@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const UserSchema = require('../modules/User')
 
 const groupSchema = new mongoose.Schema({
   name: {
@@ -10,11 +11,11 @@ const groupSchema = new mongoose.Schema({
   },
   members: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Group',
+    ref: 'User',
   }],
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Group',
+    ref: 'User',
     required: true,
   },
   createdAt: {
