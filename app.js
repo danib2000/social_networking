@@ -43,13 +43,10 @@ app.use((err, req, res, next) => {
         }
     });
 });
-const uri = "mongodb+srv://cluster0.vpwwxax.mongodb.net/?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 
-mongoose.connect(uri, { useUnifiedTopology: true ,
-    ssl: true,
-    sslValidate: true,
-    sslCA: `${__dirname}/mongo_cert/mongo.pem`,
-    authMechanism: 'MONGODB-X509'})
+const uri = "mongodb+srv://social_network:ipEFdWLr8Bf9WnO2@cluster0.vpwwxax.mongodb.net/?retryWrites=true&w=majority"
+
+mongoose.connect(uri, { useUnifiedTopology: true ,})
 .then(()=>{
     app.listen(3001,()=>{console.log('Server running on port 3001');});
 });
