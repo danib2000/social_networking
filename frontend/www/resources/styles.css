@@ -103,14 +103,10 @@ aside .list-group-item {
 
 .sticky-aside {
     position: -webkit-sticky;
-    /* For Safari */
     position: sticky;
     top: 0;
-    /* Distance from the top of the page */
     height: 100vh;
-    /* Optional: To ensure it occupies the entire viewport height */
     overflow-y: auto;
-    /* Allows internal scrolling if the content exceeds the height */
 }
 
 /* Footer */
@@ -153,7 +149,5 @@ footer {
 
 .card-img-top {
     height: 200px;
-    /* Fixed height */
     object-fit: cover;
-    /* Cover fit */
 }
