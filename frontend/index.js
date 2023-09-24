@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'www')))
 
 app.get('/', (req, res) => {
-    res.sendFile('profile/index.html');
+    res.sendFile(`${__dirname}/www/home/index.html`);
 });
 
 app.listen(3000, () => {

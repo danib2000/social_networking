@@ -1,0 +1,159 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+@font-face {
+    font-family: 'Heebo-Light';
+    src: url('resources/fonts/Heebo-Light.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: 'Heebo-Light', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #4a90e2;
+}
+
+/* Header */
+header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 0;
+}
+
+header .logo {
+    font-size: 26px;
+    margin-left: 20px;
+}
+
+header .logo-image {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.5s;
+}
+
+Header .rotated {
+    transform: rotate(360deg);
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    gap: 15px;
+}
+
+nav ul li a {
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Main Content */
+main {
+    padding: 20px 0;
+}
+
+/* Sidebar */
+aside {
+    padding: 20px;
+}
+
+aside h4 {
+    margin-bottom: 1.5rem;
+}
+
+aside .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sticky-aside {
+    position: -webkit-sticky;
+    /* For Safari */
+    position: sticky;
+    top: 0;
+    /* Distance from the top of the page */
+    height: 100vh;
+    /* Optional: To ensure it occupies the entire viewport height */
+    overflow-y: auto;
+    /* Allows internal scrolling if the content exceeds the height */
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Text-shadow & Transition */
+.logo {
+    text-shadow: 2px 2px 4px #000;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+/* Border-radius */
+.nav-link {
+    border-radius: 5px;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover .card-body {
+    background-color: #f9f9f9;
+}
+
+.card-img-top {
+    height: 200px;
+    /* Fixed height */
+    object-fit: cover;
+    /* Cover fit */
+}
