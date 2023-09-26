@@ -36,15 +36,22 @@
             <section class="profile col-lg-8">
                 <div class="card mb-4">
                     <div class="profile-details card-body d-flex flex-column align-items-center">
-                        <img src="/resources/images/placeholder.png" alt="User's Profile Picture" class="profile-img mb-3">
-                        <h2 class="username">John Doe</h2>
-                        <p class="gender">Male</p>
-                        <p class="intrested_in">Web Development, Computer science</p>
-                        <p class="degree">Bachelor of Computer Science</p>
-                        <p class="phone">+1234567890</p>
-                        <p class="email">johndoe@email.com</p>
-                        <h2 class="groups" href="#">Groups</h2>
-                        <p class="groups_in"><a href="#" class="text-primary">Application Development</a>, <a href="#" class="text-primary">AI Research</a></p>
+                        <!-- Dynamically add profile's details -->
+                    </div>
+                </div>
+
+                <!-- Add Post Section -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="mb-4 text-center">Add Post</h4>
+                        <form id="addPostForm">
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="4" placeholder="What's on your mind?" required></textarea>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary px-4">Post</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
  

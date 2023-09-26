@@ -146,3 +146,19 @@ footer {
 .profile .card {
     text-align: center;
 }
+
+/* Add Post Styling */
+.shadow-sm {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+#addPostForm textarea.form-control {
+    border-radius: 10px;
+    border: 1px solid #e1e1e1;
+    transition: border-color 0.2s;
+}
+
+#addPostForm textarea.form-control:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
