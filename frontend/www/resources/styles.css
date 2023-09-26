@@ -151,3 +151,38 @@ footer {
     height: 200px;
     object-fit: cover;
 }
+
+/* Profile Page Styles */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username,
+.groups {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.gender,
+.proficient,
+.degree,
+.phone,
+.email,
+.intrested_in,
+.groups_in {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #777;
+}
+
+.profile .card {
+    text-align: center;
+    padding: 20px;
+}
+
+.profile .card:hover .card-body {
+    background-color: #e9e9e9;
+}

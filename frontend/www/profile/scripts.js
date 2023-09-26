@@ -49,21 +49,15 @@ const postsData = [
     }
 ];
 
-const usersData = [
+const profileData = [
     {
-        name: "Username"
-    },
-    {
-        name: "Username"
-    },
-    {
-        name: "Username"
-    },
-    {
-        name: "Username"
-    },
-    {
-        name: "Username"
+        username: "Ron Megini",
+        gender: "Male",
+        intrested_in: ["Web Development", "Computer science"],
+        degree: "Bachelor of Computer Science",
+        phone: "+1234567890",
+        email: "johndoe@email.com",
+        groups_in: ["Application Development", "AI Research"]
     }
 ];
 
@@ -82,6 +76,24 @@ const groupsData = [
     },
     {
         name: "Group Name"
+    }
+];
+
+const usersData = [
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
     }
 ];
 
@@ -130,6 +142,26 @@ function generateGroups(data) {
     }).join("");
 }
 
+function generateProfile(data) {
+    return data.map(profile => {
+        const intrested_in = profile.intrested_in.map(intrest => intrest).join(", ");
+        const groups_in = profile.groups_in.map(group => `<a href="#" class="text-primary">${group}</a>`).join(", ");
+
+        return `
+        <img src="/resources/images/placeholder.png" alt="User's Profile Picture" class="profile-img mb-3">
+        <h2 class="username">${profile.username}</h2>
+        <p class="gender">${profile.gender}</p>
+        ${ intrested_in ? `<p class="intrested_in">${intrested_in}</p>` : "" }
+        <p class="degree">${profile.degree}</p>
+        <p class="phone">${profile.phone}</p>
+        <p class="email">${profile.email}</p>
+        <h2 class="groups" href="#">Groups</h2>
+        ${ groups_in ? `<p class="groups_in">${groups_in}</p>` : "" }
+        `;
+    }).join("");
+}
+
+
 $(document).ready(function() {
     $('.posts').html(generatePosts(postsData));
 });
@@ -146,4 +178,8 @@ $(document).ready(function() {
     $('.logo-image').click(function() {
         $(this).toggleClass('rotated');
     });
-}); 
+});
+
+$(document).ready(function() {
+    $('.profile-details').html(generateProfile(profileData));
+});

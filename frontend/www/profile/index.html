@@ -7,7 +7,7 @@
     <title>IntelligNet</title>
     <link rel="icon" href="/resources/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/resources/styles.css">
-    <script src="/home/scripts.js" defer></script>
+    <script src="/profile/scripts.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -21,8 +21,8 @@
             <img src="/resources/images/microscope.png" alt="IntelligNet Logo" class="logo-image">
             <nav>
                 <ul class="nav">
-                    <li class="nav-item"><a href="/home/index.html" class="nav-link text-white active">Home</a></li>
-                    <li class="nav-item"><a href="/profile/index.html" class="nav-link text-white">Profile</a></li>
+                    <li class="nav-item"><a href="/home/index.html" class="nav-link text-white">Home</a></li>
+                    <li class="nav-item"><a href="/profile/index.html" class="nav-link text-white active">Profile</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white">Messages</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white">Map</a></li>
                 </ul>
@@ -32,10 +32,27 @@
 
     <main class="container mt-4">
         <div class="row">
-
-            <!-- Main Content (Posts) -->
-            <section class="posts col-lg-8">
-                <!-- Dynamically add Posts -->
+            <!-- User Profile Section -->
+            <section class="profile col-lg-8">
+                <div class="card mb-4">
+                    <div class="profile-details card-body d-flex flex-column align-items-center">
+                        <img src="/resources/images/placeholder.png" alt="User's Profile Picture" class="profile-img mb-3">
+                        <h2 class="username">John Doe</h2>
+                        <p class="gender">Male</p>
+                        <p class="intrested_in">Web Development, Computer science</p>
+                        <p class="degree">Bachelor of Computer Science</p>
+                        <p class="phone">+1234567890</p>
+                        <p class="email">johndoe@email.com</p>
+                        <h2 class="groups" href="#">Groups</h2>
+                        <p class="groups_in"><a href="#" class="text-primary">Application Development</a>, <a href="#" class="text-primary">AI Research</a></p>
+                    </div>
+                </div>
+ 
+                <!-- User Posts -->
+                <h3 class="mb-3">My Posts</h3>
+                <section class="posts col-lg-12">
+                    <!-- Dynamically add Posts -->
+                </section>
             </section>
 
             <!-- Sidebar (Aside) -->
@@ -50,7 +67,6 @@
                     <!-- Dynamically add groups -->
                 </ul>
             </aside>
-
         </div>
     </main>
 
@@ -58,6 +74,7 @@
     <footer class="bg-dark text-white text-center py-4 mt-4">
         &copy; 2023 IntelligNet. All Rights Reserved.
     </footer>
+
 </body>
 
 </html>
