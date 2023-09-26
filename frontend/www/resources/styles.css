@@ -118,26 +118,20 @@ footer {
 }
 
 /* Profile Page Styles */
-.profile-img {
+.profile-img,
+.subject-image {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.username,
-.groups {
+.subtitle {
     font-size: 24px;
     margin-bottom: 5px;
 }
 
-.gender,
-.proficient,
-.degree,
-.phone,
-.email,
-.intrested_in,
-.groups_in {
+.detail {
     font-size: 16px;
     margin-bottom: 5px;
     color: #777;
