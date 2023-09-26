@@ -49,24 +49,6 @@ const postsData = [
     }
 ];
 
-const usersData = [
-    {
-        name: "Username"
-    },
-    {
-        name: "Username"
-    },
-    {
-        name: "Username"
-    },
-    {
-        name: "Username"
-    },
-    {
-        name: "Username"
-    }
-];
-
 const groupsData = [
     {
         name: "Group Name"
@@ -82,6 +64,24 @@ const groupsData = [
     },
     {
         name: "Group Name"
+    }
+];
+
+const usersData = [
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
+    },
+    {
+        name: "Username"
     }
 ];
 
@@ -112,7 +112,7 @@ function generateUsers(data) {
     return data.map(user => {
         return `
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                ${user.name}
+                <a href="/profile/${user.name}">${user.name}</a>
                 <button class="btn btn-sm btn-primary">Add Friend</button>
             </li>
         `;
@@ -130,20 +130,46 @@ function generateGroups(data) {
     }).join("");
 }
 
+function generateProfile(username) {
+    profileData = [{
+        username: username,
+        gender: "Male",
+        intrested_in: ["Web Development", "Computer science"],
+        degree: "Bachelor of Computer Science",
+        phone: "+1234567890",
+        email: "johndoe@email.com",
+        groups_in: ["Application Development", "AI Research"]
+    }];
+    return profileData.map(profile => {
+        const intrested_in = profile.intrested_in.map(intrest => intrest).join(", ");
+        const groups_in = profile.groups_in.map(group => `<a href="#" class="text-primary">${group}</a>`).join(", ");
+
+        return `
+        <img src="/resources/images/placeholder.png" alt="User's Profile Picture" class="profile-img mb-3">
+        <h2 class="username">${profile.username}</h2>
+        <p class="gender">${profile.gender}</p>
+        ${ intrested_in ? `<p class="intrested_in">${intrested_in}</p>` : "" }
+        <p class="degree">${profile.degree}</p>
+        <p class="phone">${profile.phone}</p>
+        <p class="email">${profile.email}</p>
+        <h2 class="groups" href="#">Groups</h2>
+        ${ groups_in ? `<p class="groups_in">${groups_in}</p>` : "" }
+        `;
+    }).join("");
+}
+
+
 $(document).ready(function() {
     $('.posts').html(generatePosts(postsData));
-});
-
-$(document).ready(function() {
     $('.suggested-users').html(generateUsers(usersData));
-});
-
-$(document).ready(function() {
     $('.suggested-groups').html(generateGroups(groupsData));
-});
-
-$(document).ready(function() {
+    
     $('.logo-image').click(function() {
         $(this).toggleClass('rotated');
     });
-}); 
+
+    const pathComponents = window.location.pathname.split('/');
+    const username = pathComponents[2];
+    $('.profile-details').html(generateProfile(username));
+});
+
