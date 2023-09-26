@@ -13,6 +13,10 @@ app.get('/profile/*', (req, res) => {
     res.sendFile(`${__dirname}/www/profile/index.html`);
 });
 
+app.get('/group/*', (req, res) => {
+    res.sendFile(`${__dirname}/www/group/index.html`);
+});
+
 app.listen(3000, () => {
     console.log('Application listening on port 3000!');
 });

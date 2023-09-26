@@ -1,48 +1,48 @@
 const postsData = [
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
     },
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
     },
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
     },
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
     },
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
     },
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
     },
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
     },
     {
-        username: "Username",
+        username: "User Name",
         timeAgo: "3 hrs ago",
         content: "This is a sample post content. Here goes the user's post text.",
         imagePath: "/resources/images/placeholder.png"
@@ -69,19 +69,19 @@ const groupsData = [
 
 const usersData = [
     {
-        name: "Username"
+        name: "User Name"
     },
     {
-        name: "Username"
+        name: "User Name"
     },
     {
-        name: "Username"
+        name: "User Name"
     },
     {
-        name: "Username"
+        name: "User Name"
     },
     {
-        name: "Username"
+        name: "User Name"
     }
 ];
 
@@ -123,7 +123,7 @@ function generateGroups(data) {
     return data.map(group => {
         return `
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            ${group.name}
+            <a href="/group/${group.name}">${group.name}</a>
             <button class="btn btn-sm btn-primary">Join Group</button>
         </li>
         `;
@@ -138,22 +138,45 @@ function generateProfile(username) {
         degree: "Bachelor of Computer Science",
         phone: "+1234567890",
         email: "johndoe@email.com",
-        groups_in: ["Application Development", "AI Research"]
+        groups: ["Application Development", "AI Research"]
     }];
     return profileData.map(profile => {
         const intrested_in = profile.intrested_in.map(intrest => intrest).join(", ");
-        const groups_in = profile.groups_in.map(group => `<a href="#" class="text-primary">${group}</a>`).join(", ");
+        const groups = profile.groups.map(group => `<a href="/group/${group}" class="text-primary">${group}</a>`).join(", ");
 
         return `
         <img src="/resources/images/placeholder.png" alt="User's Profile Picture" class="profile-img mb-3">
-        <h2 class="username">${profile.username}</h2>
-        <p class="gender">${profile.gender}</p>
-        ${ intrested_in ? `<p class="intrested_in">${intrested_in}</p>` : "" }
-        <p class="degree">${profile.degree}</p>
-        <p class="phone">${profile.phone}</p>
-        <p class="email">${profile.email}</p>
-        <h2 class="groups" href="#">Groups</h2>
-        ${ groups_in ? `<p class="groups_in">${groups_in}</p>` : "" }
+        <h2 class="subtitle">${profile.username}</h2>
+        <p class="detail">${profile.gender}</p>
+        ${ intrested_in ? `<p class="detail">${intrested_in}</p>` : "" }
+        <p class="detail">${profile.degree}</p>
+        <p class="detail">${profile.phone}</p>
+        <p class="detail">${profile.email}</p>
+        <h2 class="subtitle">Groups:</h2>
+        ${ groups ? `<p class="detail">${groups}</p>` : "" }
+        `;
+    }).join("");
+}
+
+function generateGroup(groupname) {
+    groupData = [{
+        groupname: groupname,
+        subject: "subject",
+        description: "description",
+        location: "location",
+        members: ["Ron Megini", "Adi Hakimi", "Dani Sudani"]
+    }];
+    return groupData.map(group => {
+        const members = group.members.map(member => `<a href="/profile/${member}" class="text-primary">${member}</a>`).join(", ");
+
+        return `
+        <img src="/resources/images/placeholder.png" alt="User's Profile Picture" class="profile-img mb-3">
+        <h2 class="subtitle">${group.groupname}</h2>
+        <p class="detail">${group.subject}</p>
+        <p class="detail">${group.description}</p>
+        <p class="detail">${group.location}</p>
+        <h2 class="subtitle">Members:</h2>
+        ${ members ? `<p class="detail">${members}</p>` : "" }
         `;
     }).join("");
 }
@@ -169,7 +192,8 @@ $(document).ready(function() {
     });
 
     const pathComponents = window.location.pathname.split('/');
-    const username = pathComponents[2];
-    $('.profile-details').html(generateProfile(username));
+    const object = pathComponents[2];
+    $('.profile-details').html(generateProfile(object));
+    $('.group-details').html(generateGroup(object));
 });
 
