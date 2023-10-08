@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/user");
 const groupRoute = require("./routes/group");
+const postRoute = require("./routes/post")
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -26,6 +27,8 @@ app.use((req, res, next) => {
 // Routes which should handle requests
 app.use("/users", authRoutes);
 app.use("/groups", groupRoute);
+app.use("/posts", postRoute);
+
 //app.use('/auth/search', search)
 app.use((req, res, next) => {
   const err = new Error("not found");
