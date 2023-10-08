@@ -1,19 +1,21 @@
 const Group = require("../modules/Group");
 const { body, validationResult } = require("express-validator");
+const User = require("../modules/User")
 const userController = require("../controllers/user");
 
 class GroupController {
-  async createNewGroup(newGroup) {
+  async createNewGroup(body) {
+    const newGroup = new Group(body);
     return new Promise(async (resolve, reject) => {
-      const newGroup = new Group(newGroup);
+      
       const creator = await User.findById(newGroup.creator);
 
       if (!creator) {
-        reject({status: 404, message: "Creator not found"})
+        reject({status: 400, message: "Creator not found"})
       }
       const group = await Group.find({ name: newGroup.name });
-
-      if (group) {
+      console.log(group)
+      if (group.length) {
         reject({ status: 400, message: "Group name is taken" });
       }
       newGroup
