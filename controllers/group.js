@@ -1,14 +1,17 @@
 const Group = require("../modules/Group");
 const { body, validationResult } = require("express-validator");
+const userController = require("../controllers/user");
 
 class GroupController {
   async createNewGroup(newGroup) {
     return new Promise(async (resolve, reject) => {
+      const newGroup = new Group(newGroup);
+      const creator = await User.findById(newGroup.creator);
+
+      if (!creator) {
+        reject({status: 404, message: "Creator not found"})
+      }
       const group = await Group.find({ name: newGroup.name });
-      console.log(
-        "🚀 ~ file: group.js:8 ~ GroupController ~ returnnewPromise ~ group:",
-        group
-      );
 
       if (group) {
         reject({ status: 400, message: "Group name is taken" });
@@ -24,7 +27,7 @@ class GroupController {
     });
   }
   catch(err) {
-    throw new Error(err.message);
+    reject({status: 500, message:err.message})
   }
 
   async updateGroup(groupId, groupToUpdate) {
@@ -64,6 +67,91 @@ class GroupController {
         .catch((err) => {
           reject(err);
         });
+    });
+  }
+
+  async addUserToGroup(groupId, userId, token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        userDetails = await userController.getUserDetailsFromToken(token);
+
+        const group = await Group.findById(groupId);
+
+        if (!group) {
+          return reject({ status: 404, message: "Group not found" });
+        }
+
+        if (group.creator != userDetails.id) {
+          return reject({
+            status: 403,
+            message: "Forbbiden to change this group",
+          });
+        }
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+          return reject({ status: 404, message: "User not found" });
+        }
+
+        if (group.members.includes(userId)) {
+          return reject({
+            status: 400,
+            message: "User is already a member of the group",
+          });
+        }
+
+        group.members.push(userId);
+
+        await group.save();
+
+        resolve();
+      } catch (err) {
+        console.log(err);
+        return reject({ status: 401, message: "Unauthorized" });
+      }
+    });
+  }
+
+  async removeUserToGroup(groupId, userId, token) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        userDetails = await userController.getUserDetailsFromToken(token);
+
+        const group = await Group.findById(groupId);
+
+        if (!group) {
+          return reject({ status: 404, message: "Group not found" });
+        }
+
+        if (group.creator != userDetails.id) {
+          return reject({
+            status: 403,
+            message: "Forbbiden to change this group",
+          });
+        }
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+          return reject({ status: 404, message: "User not found" });
+        }
+
+        if (!group.members.includes(userId)) {
+          return reject({
+            status: 400,
+            message: "User is not a member of the group",
+          });
+        }
+
+        group.members.remove(userId);
+        await group.save();
+
+        resolve();
+      } catch (err) {
+        console.log(err);
+        return reject({ status: 401, message: "Unauthorized" });
+      }
     });
   }
 }
