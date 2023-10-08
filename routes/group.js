@@ -91,9 +91,13 @@ router.put(
 
 // Delete a group
 router.delete("/:id", async (req, res) => {
-  await groupController.deleteGroup(req.params.id);
-
-  res.status(204).send();
+  try {
+    await groupController.deleteGroup(req.params.id);
+    res.status(204).json({ message: "Group deleted" });
+    return;
+  } catch (err) {
+    res.status(err.status).json(err.message);
+  }
 });
 
 // Remove a user from a group
