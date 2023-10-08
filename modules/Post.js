@@ -24,9 +24,11 @@ const PostSchema = new mongoose.Schema({
   },
   like: {
     type: Array,
+    ref: "User"
   },
   dislike: {
     type: Array,
+    ref: "User"
   },
   comments: [
     {
