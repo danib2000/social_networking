@@ -47,9 +47,10 @@ router.post(
     }
 
     try {
-      await groupController.createNewGroup(group,);
-      res.status(201).json(group);
+      await groupController.createNewGroup(req.body);
+      res.status(201).json(req.body);
     } catch (err) {
+      console.log(err)
       res.status(err.status).json(err.message);
     }
   }
