@@ -7,6 +7,7 @@ const postRoute = require("./routes/post")
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path")
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,9 +26,23 @@ app.use((req, res, next) => {
 });
 
 // Routes which should handle requests
-app.use("/users", authRoutes);
-app.use("/groups", groupRoute);
-app.use("/posts", postRoute);
+app.use("/api/users", authRoutes);
+app.use("/api/groups", groupRoute);
+app.use("/api/posts", postRoute);
+app.use(express.static(path.join(__dirname, '/frontend/www')))
+
+app.get('/', (req, res) => {
+  console.log("asdsd")
+    res.sendFile(`${__dirname}/frontend/www/home/index.html`);
+});
+
+app.get('/profile/*', (req, res) => {
+    res.sendFile(`${__dirname}/frontend/www/profile/index.html`);
+});
+
+app.get('/group/*', (req, res) => {
+    res.sendFile(`${__dirname}/frontend/www/group/index.html`);
+});
 
 //app.use('/auth/search', search)
 app.use((req, res, next) => {
@@ -44,6 +59,8 @@ app.use((err, req, res, next) => {
     },
   });
 });
+
+console.log(path.join(__dirname, '/frontend/www'))
 
 const uri =
   "mongodb+srv://social_network:ipEFdWLr8Bf9WnO2@cluster0.vpwwxax.mongodb.net/?retryWrites=true&w=majority";
