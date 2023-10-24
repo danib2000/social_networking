@@ -41,7 +41,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.get("/getCustomer", (req, res, next) => {
+router.get("/tokenDetails", (req, res, next) => {
   // Get auth header value
   const bearerHeader = req.headers["authorization"];
   // check if bearer is undefined
@@ -52,26 +52,30 @@ router.get("/getCustomer", (req, res, next) => {
     const bearerToken = bearer[1];
     // Set token
     req.token = bearerToken;
-    // continu
   } else {
     res.sendStatus(403);
+    return;
   }
   try {
     userController
       .getUserDetailsFromToken(req.token)
       .then((customer) => {
         res.status(200).json(customer);
+        return;
       })
       .catch((err) => {
+        console.log("🚀 ~ file: user.js:67 ~ router.get ~ err:", err);
         res.sendStatus(400);
-        throw new Error(err);
+        return;
       });
   } catch (err) {
     console.error(err);
     if (err.message === "Not Found") {
       res.status(404).json({ Error: err.message });
+      return;
     } else {
       res.status(400).json({ Error: err.message });
+      return;
     }
   }
 });
@@ -140,23 +144,23 @@ router.delete("/", (req, res) => {
 });
 router.put("/", (req, res) => {
   try {
-      userController
-        .updateUser(
-          req.body.userName,
-          req.body.newPassword,
-          req.body.newRole,
-          req.body.newEmail
-        )
-        .then((token) => {
-          res.status(200).json({ Update: "Updated user!", token: token });
-        })
-        .catch((err) => {
-          if (err.message === "Not Found") {
-            res.status(404).json({ Error: err.message });
-          } else {
-            res.status(400).json({ Error: err.message });
-          }
-        });
+    userController
+      .updateUser(
+        req.body.userName,
+        req.body.newPassword,
+        req.body.newRole,
+        req.body.newEmail
+      )
+      .then((token) => {
+        res.status(200).json({ Update: "Updated user!", token: token });
+      })
+      .catch((err) => {
+        if (err.message === "Not Found") {
+          res.status(404).json({ Error: err.message });
+        } else {
+          res.status(400).json({ Error: err.message });
+        }
+      });
   } catch (err) {
     if (err.message === "Not Found") {
       res.status(404).json({ Error: err.message });

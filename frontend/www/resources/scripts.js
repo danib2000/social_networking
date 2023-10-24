@@ -207,6 +207,32 @@ function generateGroup(groupname) {
     .join("");
 }
 
+// Cookies
+function createCookie(name, value, days) {
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    var expires = "; expires=" + date.toGMTString();
+  } else var expires = "";
+
+  document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function readCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+function eraseCookie(name) {
+  createCookie(name, "", -1);
+}
+
 $(document).ready(function () {
   $(".posts").html(generatePosts(postsData));
   $(".suggested-users").html(generateUsers(usersData));
@@ -215,6 +241,27 @@ $(document).ready(function () {
   $(".logo-image").click(function () {
     $(this).toggleClass("rotated");
   });
+
+  if (readCookie("Authorization")) {
+    token = readCookie("Authorization");
+    $.ajax({
+      type: "GET",
+      url: "/api/users/tokenDetails",
+      headers: {
+        "X-Test-Header": "test-value",
+        Authorization: "bearer " + token,
+      },
+      success: function (msg) {
+        console.log("asd");
+        console.log(msg);
+      },
+      error: function () {
+        console.log("token not valid");
+      },
+    });
+  }
+
+  console.log(readCookie("Authorization"));
 
   const pathComponents = window.location.pathname.split("/");
   const object = pathComponents[2];
@@ -293,7 +340,7 @@ $("#modal_trigger").on("click", function () {
           password: password,
         },
         success: function (msg, status) {
-          document.cookie = "Authorization=" + msg.token;
+          createCookie("Authorization", msg.token);
           location.reload();
         },
         error: function (errorThrown) {

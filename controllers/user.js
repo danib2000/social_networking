@@ -108,6 +108,10 @@ class UserController {
    * @param {string jwt} token
    */
   async getUserDetailsFromToken(token) {
+    console.log(
+      "🚀 ~ file: user.js:111 ~ UserController ~ getUserDetailsFromToken ~ token:",
+      token
+    );
     try {
       return new Promise((resolve, reject) => {
         // decode token and response with two options:
