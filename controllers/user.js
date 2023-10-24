@@ -78,6 +78,7 @@ class UserController {
    */
   async authenticateLogIn(userName, password) {
     try {
+      console.log(userName, password);
       // find user with the same userName
       const user = await UserSchema.findOne({ userName: userName });
       // hash given password

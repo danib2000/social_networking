@@ -38,13 +38,19 @@
 
       <!-- Username & Password Login form -->
       <div class="user_login">
+        <div id="login_err" class="error-container" style="display: none">
+          <h2 class="error-message">Invalid Login</h2>
+          <p>
+            The username or password you entered is incorrect. Please try again.
+          </p>
+        </div>
         <form>
-          <label>Email / Username</label>
-          <input type="text" />
+          <label>Username</label>
+          <input type="text" id="login_username" />
           <br />
 
           <label>Password</label>
-          <input type="password" />
+          <input type="password" id="login_password" />
           <br />
 
           <div class="checkbox">
@@ -59,7 +65,7 @@
               >
             </div>
             <div class="one_half last">
-              <a href="#" class="btn btn_red">Login</a>
+              <a href="#" id="login" class="btn btn_red">Login</a>
             </div>
           </div>
         </form>
@@ -69,17 +75,21 @@
 
       <!-- Register Form -->
       <div class="user_register">
+        <div id="register_err" class="error-container" style="display: none">
+          <h2 class="error-message">Invalid Register</h2>
+          <p>The username is already used. Please try again.</p>
+        </div>
         <form>
-          <label>Full Name</label>
-          <input type="text" />
+          <label>Username</label>
+          <input type="text" id="register_username" />
           <br />
 
           <label>Email Address</label>
-          <input type="email" />
+          <input type="email" id="register_email" />
           <br />
 
           <label>Password</label>
-          <input type="password" />
+          <input type="password" id="register_password" />
           <br />
 
           <div class="checkbox">
@@ -94,7 +104,7 @@
               >
             </div>
             <div class="one_half last">
-              <a href="#" class="btn btn_red">Register</a>
+              <a href="#" id="register" class="btn btn_red">Register</a>
             </div>
           </div>
         </form>

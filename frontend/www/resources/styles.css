@@ -391,3 +391,12 @@ a.btn_red {
     clear: both;
     overflow: hidden;
 }
+
+.error-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+}

@@ -252,5 +252,57 @@ $("#modal_trigger").on("click", function () {
       $(".popupContainer").hide();
       return false;
     });
+
+    $("#register").click(function () {
+      var username = $("#register_username").val();
+      var password = $("#register_password").val();
+      var email = $("#register_email").val();
+
+      $.ajax({
+        type: "POST",
+        url: "/api/users/",
+        data: {
+          userName: username,
+          email: email,
+          password: password,
+          role: "user",
+        },
+        success: function (msg, status) {
+          location.reload();
+        },
+        error: function (errorThrown) {
+          if (errorThrown == "Bad Request") {
+            $("#login_err").show();
+          }
+          if (errorThrown.statusText == "Conflict") {
+            $("#register_err").show();
+          }
+          console.log(errorThrown);
+        },
+      });
+    });
+
+    $("#login").click(function () {
+      var username = $("#login_username").val();
+      var password = $("#login_password").val();
+      $.ajax({
+        type: "POST",
+        url: "/api/users/authenticate",
+        data: {
+          userName: username,
+          password: password,
+        },
+        success: function (msg, status) {
+          document.cookie = "Authorization=" + msg.token;
+          location.reload();
+        },
+        error: function (errorThrown) {
+          if (errorThrown == "Bad Request") {
+            $("#login_err").show();
+          }
+          $("#login_err").show();
+        },
+      });
+    });
   });
 });
